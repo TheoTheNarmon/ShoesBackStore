@@ -2,6 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -17,9 +18,34 @@ public class Main {
             System.out.println(" ");
             switch (option) {
                 case 1 -> System.out.println("producto agregado");
-                case 2 -> System.out.println("productos enlistados");
-                case 3 -> System.out.println("producto buscado");
-                case 4 -> System.out.println("producto eliminado");
+                case 2 -> {System.out.println(Shoe.getShoes());}
+                case 3 -> {
+                    System.out.println("Ingrese el Id");
+                    /*String id = scanner.nextLine().trim();
+                    Shoe shoe = getById(id);
+                    if(shoe == null) {
+                        System.out.println("No existe un producto con ese ID");
+                    }
+                    else{
+                        System.out.println(shoe);
+                        System.out.println("Ingrese 1 para editar, cualquier otro numero para no hacerlo");
+                        int enter = readOption();
+                        switch (enter) {
+                            case 1 -> {update(shoe);}
+                        }
+                    }*/
+                }
+                case 4 ->{
+                    System.out.println("Ingrese el Id");
+                    String id = scanner.nextLine().trim();
+                    Shoe shoe = getById(id);
+                    if(shoe == null) {
+                        System.out.println("No existe un producto con ese ID");
+                    }
+                    else{
+                        shoe.delete();
+                    }
+                }
                 case 5 -> System.out.println("pedido creado");
                 case 6 -> System.out.println("pedidos enlistados");
                 case 7 -> {
@@ -32,6 +58,8 @@ public class Main {
         }
 
     }
+
+
     private static void showMenu() {
         System.out.println("=== MENÚ ===");
         System.out.println("1. Agregar Producto");
@@ -53,7 +81,7 @@ public class Main {
     }
 
 
-    public Shoe getByID(String id) {
+    public static Shoe getById(String id) {
         return Shoe.shoes.stream().filter(s -> s.getId().equals(id)).findFirst().orElse(null);
     }
 
