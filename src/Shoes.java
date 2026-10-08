@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.UUID;
 
 class Shoe {
-    public static final List<Shoe> shoes = new ArrayList<Shoe>();
+    private static final List<Shoe> shoes = new ArrayList<Shoe>();
 
-    private String id;
+    private final String id;
     private String name;
     private double price;
     private int quantityStock;
 
-    public Shoe(String id, String name, double price, int quantityStock) {
-        this.id = id;
+    public Shoe(String name, double price, int quantityStock) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.price = price;
         this.quantityStock = quantityStock;
@@ -37,8 +37,8 @@ class Shoe {
 
 class Botin extends Shoe{
     private int condition;
-    public Botin(String id, String name, double price, int quantityStock, int condition) {
-        super(id, name, price, quantityStock);
+    public Botin(String name, double price, int quantityStock, int condition) {
+        super(name, price, quantityStock);
         this.condition = condition;
     }
 
