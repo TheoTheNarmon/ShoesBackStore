@@ -21,11 +21,11 @@ public class Main {
             System.out.println(" ");
             switch (option) {
                 case 1 -> addProduct();
-                case 2 -> System.out.println(Shoe.getShoes());
+                case 2 -> showProducts(Shoe.getShoes());
                 case 3 -> searchProduct();
                 case 4 -> deleteProduct();
                 case 5 -> createOrder();
-                case 6 -> System.out.println(Order.getOrders());
+                case 6 -> showOrders(Order.getOrders());
                 case 7 -> {
                     System.out.println("bye bye");
                     end = true;
@@ -113,6 +113,19 @@ public class Main {
         }
     }
 
+    private static void showProducts(List<Shoe> shoes){
+        for(Shoe shoe : shoes){
+            System.out.println("id: " + shoe.getId());
+            System.out.println("Nombre: " + shoe.getName());
+            System.out.println("Price: $" + shoe.getPrice());
+            System.out.println("Stock: " + shoe.getStock());
+
+            if(shoe instanceof Botin){
+                System.out.println("Condicion: " + ((Botin) shoe).getCondition());
+            }
+        }
+    }
+
     private static void searchProduct(){
         System.out.println("Ingrese el Id");
         String id = scanner.nextLine().trim();
@@ -165,6 +178,16 @@ public class Main {
             else{
                 shoes.add(shoe);
             }
+        }
+    }
+
+    private static void showOrders(List<Order> orders){
+        for(Order order : orders){
+            System.out.println("id: " + order.getId());
+            System.out.println("Productos ordenados: [");
+            showProducts(order.getShoesOrdered());
+            System.out.println("]");
+            System.out.println("precio total: $" + order.price());
         }
     }
 
